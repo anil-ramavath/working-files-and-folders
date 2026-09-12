@@ -16,5 +16,11 @@ pipeline {
                  sh "mvn clean package"
             }
         }
+        stage ("Deploy") {
+             steps {
+                 deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat credentials', path: '', url: 'http://23.22.13.72:8080/')], contextPath: 'flm-app', war: 'target/*.war'
+            }
+        }
     }
 }
+# Used test as separate server, setup maven build, deployed to tomcat server with creds #username : tomcat #password : admin@123 also used tomcat script to install the files
