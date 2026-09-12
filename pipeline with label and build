@@ -1,0 +1,20 @@
+pipeline {
+    agent {
+        label "test"
+    }
+    tools {
+        maven "maven"
+    }
+    stages {
+        stage ("Code") {
+            steps {
+                git 'https://github.com/shaikmustafa77/one.git'
+            }
+        }
+        stage ("Build") {
+             steps {
+                 sh "mvn clean package"
+            }
+        }
+    }
+}
